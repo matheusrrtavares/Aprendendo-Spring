@@ -5,12 +5,10 @@ import com.matheus.aprendendoSpring.controller.dtos.UsuarioDTO;
 import com.matheus.aprendendoSpring.infrastructure.entity.Usuario;
 import com.matheus.aprendendoSpring.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.SQLDeleteAll;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController// A controller é a porta de entrada das informações da API
@@ -28,7 +26,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String login (@RequestBody UsuarioDTO usuarioDTO){
+    public String login (@RequestBody UsuarioDTO usuarioDTO) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(usuarioDTO.getEmail(), usuarioDTO.getSenha())
         );
@@ -36,12 +34,12 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscaUsuarioPorEmail(@RequestParam("email") String email){
+    public ResponseEntity<Usuario> buscaUsuarioPorEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
     @DeleteMapping("/{email}")
-    public ResponseEntity<Void> deleteUsuarioPorEmail(@PathVariable String email){
+    public ResponseEntity<Void> deleteUsuarioPorEmail(@PathVariable String email) {
          usuarioService.deletaUsuarioPorEmail(email);
             return ResponseEntity.ok().build();
     }
