@@ -15,7 +15,6 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     //salva usuarios
     public Usuario salvaUsuario(Usuario usuario) {
         try {
